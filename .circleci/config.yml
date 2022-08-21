@@ -5,6 +5,7 @@ jobs:
    machine:
     image: ubuntu-2204:2022.04.2
    steps:
+     - checkout
      - run: docker --version
      - run: docker build -t simple-node .
      - run: docker tag simple-node thinhtpt/simple-node:latest
