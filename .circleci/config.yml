@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+ build:
+   machine:
+    image: ubuntu-2204:2022.04.2
+   steps:
+     - run: docker --version
+     - run: docker build -t simple-node:$CIRCLE_BRANCH .
+     - run: docker tag simple-node:$CIRCLE_BRANCH thinhtpt/simple-node:latest
+     - run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push thinhtpt/simple-node:$CIRCLE_BRANCH
